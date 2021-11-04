@@ -1,0 +1,73 @@
+.ngAnimateTop {
+    background-color: white;
+    padding: 20px;
+    transition: all linear 1s;
+}
+
+.customClick {
+    background-color: #FF0099;
+    padding: 40px;
+}
+
+.ngAnimateTop.customClick-add {
+    -webkit-animation: 1s ng-class-animation;
+    -moz-animation: 1s ng-class-animation;
+    -ms-animation: 1s ng-class-animation;
+    -o-animation: 1s ng-class-animation;
+    animation: 1s ng-class-animation;
+}
+
+@-webkit-keyframes ng-class-animation {
+    from {
+        background-color: white;
+        border: 1px solid black;
+    }
+    to {
+        background-color: black;
+        border: 1px solid white;
+    }
+}
+
+@-moz-keyframes ng-class-animation {
+    from {
+        background-color: white;
+        border: 1px solid black;
+    }
+    to {
+        background-color: black;
+        border: 1px solid white;
+    }
+}
+
+@-ms-keyframes ng-class-animation {
+    from {
+        background-color: white;
+        border: 1px solid black;
+    }
+    to {
+        background-color: black;
+        border: 1px solid white;
+    }
+}
+
+@-o-keyframes ng-class-animation {
+    from {
+        background-color: white;
+        border: 1px solid black;
+    }
+    to {
+        background-color: black;
+        border: 1px solid white;
+    }
+}
+
+@keyframes ng-class-animation {
+    from {
+        background-color: white;
+        border: 1px solid black;
+    }
+    to {
+        background-color: black;
+        border: 1px solid white;
+    }
+}
