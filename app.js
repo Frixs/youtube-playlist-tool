@@ -1,6 +1,6 @@
 'use strict';
 
-var app = {
+var $_app = {
     modules: [],
     addModule: function(module) {
         this.modules.push(module);
@@ -15,6 +15,7 @@ var app = {
 
 // document.ready
 $(function() {
-    app.addModule(new PlaylistController()); // add module to execute in application
-    app.run(); // bootstrap application
+    $_app.addModule(new PlaylistController()); // add module to execute in application
+    $_app.run(); // bootstrap application
+    // TODO: PageValues to be able to keep config values about entire page not just app area
 });

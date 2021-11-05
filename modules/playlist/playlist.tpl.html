@@ -1,1 +1,8 @@
-Hello, here is the template! {{playlist.page.title}}
+<script type="text/template" data-template="playlist">
+    <p>{{message}} Hello, here is the template! {{fun}} message {{message}}</p>
+    {{:loop:arr_size}}
+    <div>div {{:loop:arr}}
+        <p>{{arr[i0]}}</p>
+        {{:loopend}}
+    </div>
+    {{:loopend}} </script>

@@ -6,6 +6,6 @@ class PlaylistController {
     }
 
     init() {
-        alert("says hello");
+        //console.log("init playlist controller");
     }
 }
