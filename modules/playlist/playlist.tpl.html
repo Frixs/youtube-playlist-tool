@@ -1,8 +1,8 @@
 <script type="text/template" data-template="playlist">
     <p>{{message}} Hello, here is the template! {{fun}} message {{message}}</p>
     {{:loop:arr_size}}
-    <div>div {{:loop:arr}}
+    <div>div {{:loop:arr}} {{:if:arr[i0]:ne:'B'}} {{:if:arr[i0]:ne:'A'}}
         <p>{{arr[i0]}}</p>
-        {{:loopend}}
+        {{:endif}}{{:endif}} {{:endloop}}
     </div>
-    {{:loopend}} </script>
+    {{:endloop}} </script>
