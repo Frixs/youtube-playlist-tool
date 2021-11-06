@@ -9,6 +9,16 @@ var $_app = {
         $.each(this.modules, function(index, module) { // this function takes 2 parameters
             // Iterate each module and run init function
             module.init();
+            // TODO ...
+            $_renderTemplate($('main'), 'playlist', 'modules/playlist/playlist.tpl.html', {
+                message: 'Lorem Ipsum',
+                title: 'Hey',
+                arr: ['T', 'B', 5],
+                arr_size: 3,
+                fun: function() {
+                    return "FOO";
+                }
+            });
         });
     }
 }
