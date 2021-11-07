@@ -1,32 +1,61 @@
 'use strict';
 
+// Default app route ID
+const ROUTE_DEFAULT_ID = 0; // should always match route definition ID that leads to root ('/')
 // Route definitions
 var $_routes = [];
 // First definition is always root ('/') address
 $_routes.push({
     name: 'playlist',
-    route: '/',
+    pattern: '/',
     templateUrl: 'modules/playlist/playlist.tpl.html',
     controller: 'PlaylistController'
 });
 $_routes.push({
     name: 'start',
-    route: '/start',
+    pattern: '/start',
     templateUrl: 'modules/start/start.tpl.html',
-    controller: ''
+    controller: 'StartController'
 });
-// Keep info about previous route
-var $_routePreviousHash = undefined;
+// Keep info about routes
+var $_routeState = {
+    current: { // current route values
+        id: ROUTE_DEFAULT_ID,
+        hash: undefined
+    },
+    previous: { // previous route values
+        id: ROUTE_DEFAULT_ID,
+        hash: undefined
+    }
+};
 
-// Routing function
+/**
+ * Apply route to the app
+ * @param {object} route Route object from route definitions
+ */
+function __routeApply(route) {
+    let ctrl = eval(`new ${route.controller}()`);
+    ctrl.init();
+
+    // TODO ... create updateTemplate function and solve the current linking ctrl to template
+    $_renderTemplate($('main'), route.name, route.templateUrl, ctrl.vm, function() {
+        // callback - page loaded
+        console.log("template loaded");
+    });
+}
+
+/**
+ * Routing function
+ */
 function __routing() {
     const HASH_PART = '#/'; // must contain slash at the end
 
     // Get URL after-hash part 
     let hash = window.location.hash;
-    // Default route is first registered route
-    let route = $_routes[0];
-    let routeHash = $_routes[0].route;
+    // Set defaults
+    let route = $_routes[ROUTE_DEFAULT_ID];
+    let routeHash = $_routes[ROUTE_DEFAULT_ID].pattern;
+    let routeId = ROUTE_DEFAULT_ID;
 
     // If there is anything to resolve...
     if (hash.length > HASH_PART.length) {
@@ -38,39 +67,41 @@ function __routing() {
             for (let index = 0; index < $_routes.length; index++) {
                 let testRoute = $_routes[index];
                 // TODO: add testing for URL parameters that can be defined in routes (e.g. /hellopage/:id/:message)
-                if (routeHash == testRoute.route) {
+                if (routeHash == testRoute.pattern) {
                     route = testRoute;
+                    routeId = index;
                     found = true;
-                    $_routePreviousHash = routeHash;
                     break;
                 }
             }
             // If invalid address...
             if (!found) {
+                // Go home
                 window.location.hash = HASH_PART;
             }
         }
         // Otherwise, invalid URL...
         else {
+            // Go home
             window.location.hash = HASH_PART;
         }
     }
-    // Otherwise, home page (default)...
-    else {
-        // Make sure, hash part is always set correctly
+    // If hash part set incorrectly...
+    else if (hash.length < HASH_PART.length) {
+        // Go home
         window.location.hash = HASH_PART;
     }
+    // Otherwise, home page (default) / hash part set correctly...
 
     // Fire route
-    // ... if the address is not the same as previous one
-    if (routeHash !== $_routePreviousHash) {
-        let ctrl = eval(`new ${route.controller}()`);
-        console.log(ctrl);
+    // ... if the new address is not the same as the current one...
+    if (routeHash !== $_routeState.current.hash) {
+        __routeApply(route);
 
-        // TODO ... create updateTemplate function and solve the current linking ctrl to template
-        //$_renderTemplate($('main'), route.name, route.route, ctrl.vm, function() {
-        // callback - page loaded
-        //});
+        $_routeState.previous.hash = $_routeState.current.hash;
+        $_routeState.previous.id = $_routeState.current.id;
+        $_routeState.current.hash = routeHash;
+        $_routeState.current.id = routeId;
     }
 }
 
