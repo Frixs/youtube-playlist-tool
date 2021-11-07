@@ -8,15 +8,16 @@ var $_routes = [];
 $_routes.push({
     name: 'playlist',
     pattern: '/',
-    templateUrl: 'modules/playlist/playlist.tpl.html',
+    templateUrl: 'pages/playlist/playlist.tpl.html',
     controller: 'PlaylistController'
 });
 $_routes.push({
     name: 'start',
     pattern: '/start',
-    templateUrl: 'modules/start/start.tpl.html',
+    templateUrl: 'pages/start/start.tpl.html',
     controller: 'StartController'
 });
+
 // Keep info about routes
 var $_routeState = {
     current: { // current route values
@@ -31,23 +32,30 @@ var $_routeState = {
 
 /**
  * Apply route to the app
+ * @param {object} app The app object
  * @param {object} route Route object from route definitions
  */
-function __routeApply(route) {
+function __routeApply(app, route) {
+    // Set loading flag
+    app.loading = true;
+
+    // Initialize page controller
     let ctrl = eval(`new ${route.controller}()`);
     ctrl.init();
 
-    // TODO ... create updateTemplate function and solve the current linking ctrl to template
+    // Render template
     $_renderTemplate($('main'), route.name, route.templateUrl, ctrl.vm, function() {
-        // callback - page loaded
-        console.log("template loaded");
+        // Callback - page loaded
+        app.currentPageControllerInstance = ctrl;
+        app.loading = false;
     });
 }
 
 /**
  * Routing function
+ * @param {object} app The app object
  */
-function __routing() {
+function __routing(app) {
     const HASH_PART = '#/'; // must contain slash at the end
 
     // Get URL after-hash part 
@@ -96,7 +104,7 @@ function __routing() {
     // Fire route
     // ... if the new address is not the same as the current one...
     if (routeHash !== $_routeState.current.hash) {
-        __routeApply(route);
+        __routeApply(app, route);
 
         $_routeState.previous.hash = $_routeState.current.hash;
         $_routeState.previous.id = $_routeState.current.id;
@@ -106,4 +114,6 @@ function __routing() {
 }
 
 // Listener
-window.addEventListener('popstate', __routing);
+window.addEventListener('popstate', function() {
+    __routing($_app);
+});

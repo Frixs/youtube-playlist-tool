@@ -1,8 +1,8 @@
 'use strict';
 
-class StartController {
-    constructor(name) {
-        this.vm = {};
+class StartController extends PageController {
+    constructor() {
+        super();
     }
 
     init() {

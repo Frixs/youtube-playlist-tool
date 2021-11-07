@@ -2,9 +2,11 @@
 
 var $_app = {
     title: 'YouTube Playlist Tool',
+    loading: true, // indicates if app is in loading state / true by default cuz we want to start in loading
+    currentPageControllerInstance: null, // controller instance of the current app page
     run: function() {
         // Initial call of router
-        setTimeout(__routing, 0);
+        setTimeout(__routing($_app), 0);
     }
 }
 

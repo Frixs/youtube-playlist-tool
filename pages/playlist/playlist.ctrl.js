@@ -1,8 +1,8 @@
 'use strict';
 
-class PlaylistController {
-    constructor(name) {
-        this.vm = {};
+class PlaylistController extends PageController {
+    constructor() {
+        super();
     }
 
     init() {
