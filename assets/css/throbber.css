@@ -1,0 +1,48 @@
+.throbber {
+    position: relative;
+}
+
+.throbber:before {
+    background: rgba(255, 255, 255, 0.8);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    content: '';
+}
+
+.throbber:after {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 50%;
+    left: 50%;
+    margin-top: -25px;
+    margin-left: -25px;
+    content: '';
+    border: 4px solid transparent;
+    border-top-color: #3bb9bb;
+    border-bottom-color: #3bb9bb;
+    border-radius: 50px;
+    -webkit-animation: throbber 1s infinite;
+    animation: throbber 1s infinite;
+}
+
+@-webkit-keyframes throbber {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes throbber {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
