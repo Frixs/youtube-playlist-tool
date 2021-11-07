@@ -14,9 +14,10 @@ class PageController {
     }
 
     /**
-     * Initialize controller.
+     * Initialize controller. 
+     * @param {string[]} parameters URL parameters
      */
-    init() {
+    init(parameters) {
         throw new Error("Abstract method!");
     }
 

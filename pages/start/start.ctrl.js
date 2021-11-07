@@ -5,7 +5,7 @@ class StartController extends PageController {
         super();
     }
 
-    init() {
+    init(parameters) {
         //console.log("init start controller");
     }
 }

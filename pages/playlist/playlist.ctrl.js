@@ -5,7 +5,7 @@ class PlaylistController extends PageController {
         super();
     }
 
-    init() {
+    init(parameters) {
         //console.log("init playlist controller");
     }
 }
