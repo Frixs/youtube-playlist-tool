@@ -7,25 +7,26 @@
     <meta name="keywords" content="Missing searching and sorting in YouTube playlists? This tool solves it!">
     <meta name="author" content="Tomas Frixs">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="favicon.ico" rel="icon" type="image/x-icon" />
     <!-- build:css assets/css/styles.css -->
     <link rel='stylesheet' href='assets/css/bootstrap.min.css'>
     <link rel='stylesheet' href='assets/css/loading-overlay.css'>
     <link rel='stylesheet' href='assets/css/throbber.css'>
     <link rel="stylesheet" href="pages/playlist/playlist.css" />
+    <link rel="stylesheet" href="pages/start/start.css" />
     <link rel="stylesheet" href="app.css" />
     <!-- endbuild -->
 </head>
 
 <body>
 
-    <!-- <div id="#loading-overlay" data-ng-show="page.data.loading"> -->
-    <div id="loading-overlay" class="ngAnimateTop d-none">
+    <div id="loading-overlay" class="d-none">
         <div class="center-box">
             <div class="throbber"></div>
         </div>
     </div>
 
-    <header data-ng-controller="PageController as page" class="jumbotron text-center" style="margin-bottom:0">
+    <header class="jumbotron text-center" style="margin-bottom:0">
         <h1>{{page.data.title}}</h1>
         <p>{{page.data.description}}</p>
     </header>
@@ -79,7 +80,7 @@
     <script src="services/youtube.js"></script>
     <!-- / -->
     <!-- DIRECTIVES -->
-    <script src="directives/ngAnimateTop.drct.js"></script>
+    <script src="directives/animate.drct.js"></script>
     <!-- / -->
     <!-- inject:js -->
     <template></template>
