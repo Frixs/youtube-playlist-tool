@@ -275,7 +275,7 @@ function $_renderTemplate($ctx, templateName, templateUrl, vm, callback) {
         // Proess template and render it
         $ctx.html(__processTemplate(templateName, vm));
         // Clear the template
-        //$('template').empty();
+        $('template').empty();
         // Callback
         if (callback) callback();
     });
