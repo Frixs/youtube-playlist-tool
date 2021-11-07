@@ -62,3 +62,24 @@ function utils_parseStringValue(v) {
 
     return res;
 }
+
+/**
+ * Gets function based on string name (value).
+ * Throws error if located function does not exit.
+ * @param {string} str String name
+ * @returns Function to be used and call
+ */
+function utils_stringToFunction(str) {
+    let arr = str.split(".");
+
+    let fn = (window || this);
+    for (let i = 0; i < arr.length; i++) {
+        fn = fn[arr[i]];
+    }
+
+    if (typeof fn !== "function") {
+        throw new Error("function not found!");
+    }
+
+    return fn;
+};

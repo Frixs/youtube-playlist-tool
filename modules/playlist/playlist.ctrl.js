@@ -2,7 +2,7 @@
 
 class PlaylistController {
     constructor(name) {
-        this.name = name;
+        this.vm = {};
     }
 
     init() {

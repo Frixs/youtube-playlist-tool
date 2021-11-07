@@ -241,10 +241,10 @@ function __templateParseViewModelValue(vm, token, loops = undefined) {
                     let ci = loops.s[qi];
                     i = loops.c.get(`${ci}`);
                 } else {
-                    console.error(`Invalid loop deep index (${deep})!`);
+                    throw new Error(`Invalid loop deep index (${deep})!`);
                 }
             } else {
-                console.error(`Invalid type of loop deep index (${tokenParts[1]})!`);
+                throw new Error(`Invalid type of loop deep index (${tokenParts[1]})!`);
             }
         }
 
@@ -263,7 +263,7 @@ function __templateParseViewModelValue(vm, token, loops = undefined) {
 }
 
 /**
- * Processes template, bakes view model values into it and renders it.
+ * Load template, process it, bakes view model values into it and renders it.
  * @param {*} $ctx DOM context object
  * @param {string} templateName Template name
  * @param {string} templateUrl Template URL (script URL)
@@ -272,7 +272,11 @@ function __templateParseViewModelValue(vm, token, loops = undefined) {
  */
 function $_renderTemplate($ctx, templateName, templateUrl, vm, callback) {
     $('template').load(templateUrl, function() {
+        // Proess template and render it
         $ctx.html(__processTemplate(templateName, vm));
+        // Clear the template
+        //$('template').empty();
+        // Callback
         if (callback) callback();
     });
 }
